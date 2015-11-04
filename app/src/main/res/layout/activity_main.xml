@@ -41,4 +41,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
         android:background="@drawable/btn_main_animation"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CODING TASKS"
+        android:id="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="22sp"
+        android:textColor="#ffffff"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        />
 </RelativeLayout>

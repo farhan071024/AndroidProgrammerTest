@@ -1,8 +1,12 @@
 package com.apppartner.androidprogrammertest;
 
+import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -13,56 +17,108 @@ import android.widget.RelativeLayout;
 public class AnimationActivity extends ActionBarActivity
 {
     ImageView imageView;
-    int windowwidth;
-    int windowheight;
-    private RelativeLayout.LayoutParams layoutParams ;
+    private android.widget.RelativeLayout.LayoutParams layoutParams;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
 
-        windowwidth = getWindowManager().getDefaultDisplay().getWidth();
-        windowheight = getWindowManager().getDefaultDisplay().getHeight();
 
         imageView= (ImageView) findViewById(R.id.imageView2);
-        imageView.setImageResource(R.drawable.ic_apppartner);
+       // imageView.setImageResource(R.drawable.ic_apppartner);
 
         AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
         animation.setDuration(3000);
         animation.setStartOffset(1000);
         animation.setFillAfter(true);
         imageView.startAnimation(animation);
-        imageView.setOnTouchListener(new View.OnTouchListener() {
 
+        imageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        int x_cord = (int) event.getRawX();
-                        int y_cord = (int) event.getRawY();
+            public boolean onLongClick(View v) {
+                ClipData.Item item = new ClipData.Item((CharSequence)v.getTag());
+                String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_PLAIN};
 
-                        if (x_cord > windowwidth) {
-                            x_cord = windowwidth;
-                        }
-                        if (y_cord > windowheight) {
-                            y_cord = windowheight;
-                        }
+                ClipData dragData = new ClipData(v.getTag().toString(),mimeTypes, item);
+                View.DragShadowBuilder myShadow = new View.DragShadowBuilder(imageView);
 
-                        layoutParams.leftMargin = x_cord - 25;
-                        layoutParams.topMargin = y_cord - 75;
+                v.startDrag(dragData,myShadow,null,0);
+            //    imageView.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        });
 
-                        imageView.setLayoutParams(layoutParams);
+        imageView.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+             //   imageView.setVisibility(View.INVISIBLE);
+                switch(event.getAction())
+                {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        layoutParams = (RelativeLayout.LayoutParams)v.getLayoutParams();
+                   //     Log.d(msg, "Action is DragEvent.ACTION_DRAG_STARTED");
+
+                        // Do nothing
                         break;
-                    default:
+
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                    //    Log.d(msg, "Action is DragEvent.ACTION_DRAG_ENTERED");
+                        int x_cord = (int) event.getX();
+                        int y_cord = (int) event.getY();
                         break;
+
+                    case DragEvent.ACTION_DRAG_EXITED :
+                    //    Log.d(msg, "Action is DragEvent.ACTION_DRAG_EXITED");
+                        x_cord = (int) event.getX();
+                        y_cord = (int) event.getY();
+                        layoutParams.leftMargin = x_cord;
+                        layoutParams.topMargin = y_cord;
+                        v.setLayoutParams(layoutParams);
+                        break;
+
+                    case DragEvent.ACTION_DRAG_LOCATION  :
+                 //       Log.d(msg, "Action is DragEvent.ACTION_DRAG_LOCATION");
+                        x_cord = (int) event.getX();
+                        y_cord = (int) event.getY();
+                        break;
+
+                    case DragEvent.ACTION_DRAG_ENDED   :
+                  //      Log.d(msg, "Action is DragEvent.ACTION_DRAG_ENDED");
+
+                        // Do nothing
+                        break;
+
+                    case DragEvent.ACTION_DROP:
+               //         Log.d(msg, "ACTION_DROP event");
+
+                        // Do nothing
+                        break;
+                    default: break;
                 }
                 return true;
             }
         });
+
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    ClipData data = ClipData.newPlainText("", "");
+                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(imageView);
+
+                    imageView.startDrag(data, shadowBuilder,imageView, 0);
+                    imageView.setVisibility(View.INVISIBLE);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        });
+
     }
 
     @Override
