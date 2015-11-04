@@ -14,31 +14,31 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chat"
+        android:text=""
         android:id="@+id/button"
-        android:layout_centerVertical="true"
         android:onClick="onChatButtonClicked"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignStart="@+id/button2"/>
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_main_chat"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text=""
         android:id="@+id/button2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:onClick="onLoginButtonClicked"
-        android:layout_marginTop="112dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/btn_main_login"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/animation_button"
+        android:text=""
         android:id="@+id/button3"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:onClick="onAnimationTestButtonClicked"
-        android:layout_marginBottom="42dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:background="@drawable/btn_main_animation"/>
 </RelativeLayout>
