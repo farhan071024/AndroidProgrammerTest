@@ -1,9 +1,14 @@
 package com.apppartner.androidprogrammertest;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ public class ChatActivity extends ActionBarActivity
     private ArrayList<ChatData> chatDataArrayList;
     private ChatsArrayAdapter chatsArrayAdapter;
     private ListView listView;
+    private Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,6 +40,25 @@ public class ChatActivity extends ActionBarActivity
         setContentView(R.layout.activity_chat);
 
         listView = (ListView) findViewById(R.id.listView);
+
+        toolBar= (Toolbar) findViewById(R.id.include);
+        toolBar.setTitle("Chat");
+        toolBar.setBackgroundColor(Color.BLACK);
+        toolBar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        final Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        backArrow.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(backArrow);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
         chatDataArrayList = new ArrayList<ChatData>();
 
         try

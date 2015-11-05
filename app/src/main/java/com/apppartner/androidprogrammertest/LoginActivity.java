@@ -3,10 +3,14 @@ package com.apppartner.androidprogrammertest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -33,7 +37,9 @@ import java.util.List;
 public class LoginActivity extends ActionBarActivity
 {
     EditText userName,userPassword;
+    private Toolbar toolBar;
     String nameAndPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -41,9 +47,31 @@ public class LoginActivity extends ActionBarActivity
         setContentView(R.layout.activity_login);
         userName= (EditText) findViewById(R.id.editText);
         userPassword= (EditText) findViewById(R.id.editText2);
+
+        toolBar= (Toolbar) findViewById(R.id.include);
+        toolBar.setTitle("Login");
+        toolBar.setBackgroundColor(Color.BLACK);
+        toolBar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        final Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        backArrow.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(backArrow);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
         Typeface type = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato.ttf");
+//        Typeface type2 = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato ExtraLight.ttf");
         userName.setTypeface(type);
         userPassword.setTypeface(type);
+
+
         userName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -147,7 +175,6 @@ public class LoginActivity extends ActionBarActivity
             }
         }
     }
-
 
     @Override
     public void onBackPressed()

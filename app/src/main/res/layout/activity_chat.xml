@@ -5,10 +5,12 @@
     android:layout_height="match_parent"
     tools:context="com.apppartner.androidprogrammertest.ChatActivity">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar"
+        android:id="@+id/include"/>
 
     <ListView
         android:id="@+id/listView"
+        android:layout_marginTop="58dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"/>

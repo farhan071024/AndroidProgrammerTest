@@ -3,8 +3,12 @@ package com.apppartner.androidprogrammertest;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -18,6 +22,7 @@ public class AnimationActivity extends ActionBarActivity
 {
     ImageView imageView;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
+    private Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +33,23 @@ public class AnimationActivity extends ActionBarActivity
 
         imageView= (ImageView) findViewById(R.id.imageView2);
        // imageView.setImageResource(R.drawable.ic_apppartner);
+
+        toolBar= (Toolbar) findViewById(R.id.include);
+        toolBar.setTitle("Animation");
+        toolBar.setBackgroundColor(Color.BLACK);
+        toolBar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        final Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        backArrow.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(backArrow);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
         animation.setDuration(3000);
