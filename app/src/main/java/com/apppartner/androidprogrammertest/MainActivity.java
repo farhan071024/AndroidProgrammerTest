@@ -1,17 +1,23 @@
 package com.apppartner.androidprogrammertest;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity
 {
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        textView= (TextView) findViewById(R.id.textView);
+        Typeface type = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato Bold.ttf");
+        textView.setTypeface(type);
     }
 
     public void onLoginButtonClicked(View v)

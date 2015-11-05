@@ -10,37 +10,48 @@
     tools:context=".MainActivity"
     android:background="@drawable/bg_coding_tasks">
 
-    <Button
+    <ImageButton
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text=""
         android:id="@+id/button"
         android:onClick="onChatButtonClicked"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="180dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/btn_main_chat"/>
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:background="@null"
+        android:src="@drawable/btn_main_chat"
 
-    <Button
+        />
+
+    <ImageButton
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/button2"
         android:onClick="onLoginButtonClicked"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
-        android:background="@drawable/btn_main_login"/>
+        android:layout_marginTop="260dp"
+        android:src="@drawable/btn_main_login"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:background="@null"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <ImageButton
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/button3"
         android:onClick="onAnimationTestButtonClicked"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
-        android:background="@drawable/btn_main_animation"/>
+        android:layout_marginTop="340dp"
+        android:src="@drawable/btn_main_animation"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:background="@null"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,6 +65,6 @@
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="150dp"
         />
 </RelativeLayout>

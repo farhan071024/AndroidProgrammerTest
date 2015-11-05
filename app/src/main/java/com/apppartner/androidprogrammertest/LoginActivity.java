@@ -3,6 +3,7 @@ package com.apppartner.androidprogrammertest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -40,6 +41,9 @@ public class LoginActivity extends ActionBarActivity
         setContentView(R.layout.activity_login);
         userName= (EditText) findViewById(R.id.editText);
         userPassword= (EditText) findViewById(R.id.editText2);
+        Typeface type = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato.ttf");
+        userName.setTypeface(type);
+        userPassword.setTypeface(type);
         userName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

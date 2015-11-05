@@ -5,29 +5,32 @@
     android:layout_height="match_parent"
     tools:context="com.apppartner.androidprogrammertest.AnimationActivity"
     android:background="@drawable/bg_animation">
-
     <include layout="@layout/toolbar"/>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:id="@+id/imageView2"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:alpha="1.0"
         android:src="@drawable/ic_apppartner"
+        android:layout_marginTop="120dp"
         />
 
-    <Button
-        android:layout_width="wrap_content"
+    <ImageButton
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_fade"
+        android:src="@drawable/btn_fade"
         android:gravity="center"
         android:padding="20dp"
         android:id="@+id/button4"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
         android:onClick="fade"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:background="@null"
+        android:layout_marginTop="65dp"
         />
 
 </RelativeLayout>

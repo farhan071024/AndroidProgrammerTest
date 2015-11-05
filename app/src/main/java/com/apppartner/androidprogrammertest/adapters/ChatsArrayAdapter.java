@@ -3,6 +3,7 @@ package com.apppartner.androidprogrammertest.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,7 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
             chatCell.imageView.setImageBitmap(bitmap);
             chatCell.usernameTextView.setText(chatData.username);
             chatCell.messageTextView.setText(chatData.message);
+
 
         }
     }
