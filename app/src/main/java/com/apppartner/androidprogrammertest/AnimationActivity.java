@@ -34,6 +34,7 @@ public class AnimationActivity extends ActionBarActivity
         imageView= (ImageView) findViewById(R.id.imageView2);
        // imageView.setImageResource(R.drawable.ic_apppartner);
 
+        //setting up the toolbar
         toolBar= (Toolbar) findViewById(R.id.include);
         toolBar.setTitle("Animation");
         toolBar.setBackgroundColor(Color.BLACK);
@@ -43,14 +44,13 @@ public class AnimationActivity extends ActionBarActivity
         final Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         backArrow.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(backArrow);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
+        // fading the image to 0% alpha
         AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
         animation.setDuration(3000);
         animation.setStartOffset(1000);
@@ -149,6 +149,8 @@ public class AnimationActivity extends ActionBarActivity
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    // Making the image 100% alpha by pressing "fade" button
     public void fade(View v){
         AlphaAnimation animation1 = new AlphaAnimation(0.0f, 1.0f);
         animation1.setDuration(3000);

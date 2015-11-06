@@ -41,6 +41,7 @@ public class ChatActivity extends ActionBarActivity
 
         listView = (ListView) findViewById(R.id.listView);
 
+        //setting up the toolbar
         toolBar= (Toolbar) findViewById(R.id.include);
         toolBar.setTitle("Chat");
         toolBar.setBackgroundColor(Color.BLACK);
@@ -50,7 +51,6 @@ public class ChatActivity extends ActionBarActivity
         final Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         backArrow.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(backArrow);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

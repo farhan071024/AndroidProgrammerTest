@@ -1,3 +1,6 @@
+/*Used Async task to download the images, however the loading of chat messages are slow because
+it has to run background tasks for loading the images and also repeats the processes whenever the view changes.
+The performance can be improved by storing the downloaded images into local cache and load from there*/
 package com.apppartner.androidprogrammertest.adapters;
 
 import android.content.Context;
@@ -66,6 +69,7 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
         TextView messageTextView;
         ImageView imageView;
     }
+    //using Asynctask to download the images from server
     public class DownloadImage extends AsyncTask<String,Void,Bitmap>{
         URL url = null;
         Bitmap bmp=null;
@@ -91,6 +95,7 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
             paint.setShader(shader);
             Canvas c = new Canvas(circleBitmap);
             c.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, bitmap.getWidth()/2, paint);
+            // setting the downloaded image to imageview
             chatCell.imageView.setImageBitmap(circleBitmap);
             chatCell.usernameTextView.setText(chatData.username);
             chatCell.messageTextView.setText(chatData.message);

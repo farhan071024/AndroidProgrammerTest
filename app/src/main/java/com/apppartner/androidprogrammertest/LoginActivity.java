@@ -47,7 +47,7 @@ public class LoginActivity extends ActionBarActivity
         setContentView(R.layout.activity_login);
         userName= (EditText) findViewById(R.id.editText);
         userPassword= (EditText) findViewById(R.id.editText2);
-
+        //setting up the toolbar
         toolBar= (Toolbar) findViewById(R.id.include);
         toolBar.setTitle("Login");
         toolBar.setBackgroundColor(Color.BLACK);
@@ -57,7 +57,6 @@ public class LoginActivity extends ActionBarActivity
         final Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         backArrow.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(backArrow);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +64,7 @@ public class LoginActivity extends ActionBarActivity
             }
         });
 
-
+        // applying the suggested font
         Typeface type = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato.ttf");
 //        Typeface type2 = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato ExtraLight.ttf");
         userName.setTypeface(type);
@@ -147,6 +146,7 @@ public class LoginActivity extends ActionBarActivity
             finishTime=System.currentTimeMillis();
             try {
                 final JSONObject object= new JSONObject(s);
+                // creates alert dialog
                 new AlertDialog.Builder(LoginActivity.this)
                         .setTitle(object.getString("code"))
                         .setMessage(object.getString("message")+"\nThe api call took " + (finishTime - startTime) + " miliseconds")

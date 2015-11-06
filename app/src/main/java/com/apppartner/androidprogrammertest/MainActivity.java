@@ -16,6 +16,7 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView= (TextView) findViewById(R.id.textView);
+        //applies the suggested fonts
         Typeface type = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato Bold.ttf");
         textView.setTypeface(type);
     }
@@ -38,6 +39,8 @@ public class MainActivity extends ActionBarActivity
         startActivity(intent);
     }
 
+    /* onBackPressed() was over ridden to return to home screen while pressing the back button.It
+    was required to function MainActivity's back button properly as the activity stack was not empty*/
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
