@@ -89,6 +89,7 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
+            //making the image circular in shape
             Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
             BitmapShader shader = new BitmapShader (bitmap,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
             Paint paint = new Paint();
