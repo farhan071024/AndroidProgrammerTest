@@ -1,5 +1,6 @@
 package com.apppartner.androidprogrammertest;
 
+import android.animation.ObjectAnimator;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
@@ -15,11 +16,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -40,11 +41,8 @@ public class AnimationActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
 
-
         imageView= (ImageView) findViewById(R.id.imageView2);
         bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap(); // get bitmap associated with your imageview
-
-
 
         //setting up the toolbar
         toolBar= (Toolbar) findViewById(R.id.include);
@@ -209,7 +207,7 @@ public class AnimationActivity extends ActionBarActivity
 
     }
     public void frameAnim(View v){
-        imageView.setBackgroundResource(R.drawable.rocket_thrust);
+        imageView.setBackgroundResource(R.drawable.frame);
         rocketAnimation = (AnimationDrawable) imageView.getBackground();
         rocketAnimation.start();
     }
@@ -221,5 +219,12 @@ public class AnimationActivity extends ActionBarActivity
     public void rotation(View v){
         angle=angle + 90;
         imageView.setRotation(angle);
+    }
+    public void bounce(View v){
+        ObjectAnimator animY = ObjectAnimator.ofFloat(imageView, "translationY", -100f, 0f);
+        animY.setDuration(1000);//1sec
+        animY.setInterpolator(new BounceInterpolator());
+        animY.setRepeatCount(5);
+        animY.start();
     }
 }
