@@ -37,7 +37,6 @@ public class AnimationActivity extends ActionBarActivity
 
 
         imageView= (ImageView) findViewById(R.id.imageView2);
-       // imageView.setImageResource(R.drawable.ic_apppartner);
          bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap(); // get bitmap associated with your imageview
 
 
