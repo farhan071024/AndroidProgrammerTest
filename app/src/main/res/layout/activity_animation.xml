@@ -90,5 +90,28 @@
         android:background="#FFA500"
         android:textColor="#ffffff"
         />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Frame Anim"
+        android:id="@+id/button10"
+        android:layout_marginTop="455dp"
+        android:layout_marginLeft="255dp"
+        android:onClick="frameAnim"
+        android:background="#FFA500"
+        android:textColor="#ffffff"
+        />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Anim"
+        android:id="@+id/button11"
+        android:layout_marginTop="511dp"
+        android:onClick="stopAnim"
+        android:background="#FFA500"
+        android:textColor="#ffffff"
+        />
 
 </RelativeLayout>

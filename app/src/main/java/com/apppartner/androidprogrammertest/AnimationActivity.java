@@ -9,6 +9,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class AnimationActivity extends ActionBarActivity
     final static int FLIP_VERTICAL = 1;
     final static int FLIP_HORIZONTAL = 2;
     Bitmap bitmap;
+    AnimationDrawable rocketAnimation;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -39,7 +41,8 @@ public class AnimationActivity extends ActionBarActivity
 
 
         imageView= (ImageView) findViewById(R.id.imageView2);
-         bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap(); // get bitmap associated with your imageview
+        bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap(); // get bitmap associated with your imageview
+
 
 
         //setting up the toolbar
@@ -68,14 +71,14 @@ public class AnimationActivity extends ActionBarActivity
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ClipData.Item item = new ClipData.Item((CharSequence)v.getTag());
+                ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
                 String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_PLAIN};
 
-                ClipData dragData = new ClipData(v.getTag().toString(),mimeTypes, item);
+                ClipData dragData = new ClipData(v.getTag().toString(), mimeTypes, item);
                 View.DragShadowBuilder myShadow = new View.DragShadowBuilder(imageView);
 
-                v.startDrag(dragData,myShadow,null,0);
-            //    imageView.setVisibility(View.INVISIBLE);
+                v.startDrag(dragData, myShadow, null, 0);
+                //    imageView.setVisibility(View.INVISIBLE);
                 return true;
             }
         });
@@ -83,24 +86,23 @@ public class AnimationActivity extends ActionBarActivity
         imageView.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View v, DragEvent event) {
-             //   imageView.setVisibility(View.INVISIBLE);
-                switch(event.getAction())
-                {
+                //   imageView.setVisibility(View.INVISIBLE);
+                switch (event.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED:
-                        layoutParams = (RelativeLayout.LayoutParams)v.getLayoutParams();
-                   //     Log.d(msg, "Action is DragEvent.ACTION_DRAG_STARTED");
+                        layoutParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
+                        //     Log.d(msg, "Action is DragEvent.ACTION_DRAG_STARTED");
 
                         // Do nothing
                         break;
 
                     case DragEvent.ACTION_DRAG_ENTERED:
-                    //    Log.d(msg, "Action is DragEvent.ACTION_DRAG_ENTERED");
+                        //    Log.d(msg, "Action is DragEvent.ACTION_DRAG_ENTERED");
                         int x_cord = (int) event.getX();
                         int y_cord = (int) event.getY();
                         break;
 
-                    case DragEvent.ACTION_DRAG_EXITED :
-                    //    Log.d(msg, "Action is DragEvent.ACTION_DRAG_EXITED");
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        //    Log.d(msg, "Action is DragEvent.ACTION_DRAG_EXITED");
                         x_cord = (int) event.getX();
                         y_cord = (int) event.getY();
                         layoutParams.leftMargin = x_cord;
@@ -108,24 +110,25 @@ public class AnimationActivity extends ActionBarActivity
                         v.setLayoutParams(layoutParams);
                         break;
 
-                    case DragEvent.ACTION_DRAG_LOCATION  :
-                 //       Log.d(msg, "Action is DragEvent.ACTION_DRAG_LOCATION");
+                    case DragEvent.ACTION_DRAG_LOCATION:
+                        //       Log.d(msg, "Action is DragEvent.ACTION_DRAG_LOCATION");
                         x_cord = (int) event.getX();
                         y_cord = (int) event.getY();
                         break;
 
-                    case DragEvent.ACTION_DRAG_ENDED   :
-                  //      Log.d(msg, "Action is DragEvent.ACTION_DRAG_ENDED");
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        //      Log.d(msg, "Action is DragEvent.ACTION_DRAG_ENDED");
 
                         // Do nothing
                         break;
 
                     case DragEvent.ACTION_DROP:
-               //         Log.d(msg, "ACTION_DROP event");
+                        //         Log.d(msg, "ACTION_DROP event");
 
                         // Do nothing
                         break;
-                    default: break;
+                    default:
+                        break;
                 }
                 return true;
             }
@@ -138,12 +141,10 @@ public class AnimationActivity extends ActionBarActivity
                     ClipData data = ClipData.newPlainText("", "");
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(imageView);
 
-                    imageView.startDrag(data, shadowBuilder,imageView, 0);
+                    imageView.startDrag(data, shadowBuilder, imageView, 0);
                     imageView.setVisibility(View.INVISIBLE);
                     return true;
-                }
-                else
-                {
+                } else {
                     return false;
                 }
             }
@@ -205,5 +206,15 @@ public class AnimationActivity extends ActionBarActivity
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
         imageView.setColorFilter(filter);
 
+    }
+    public void frameAnim(View v){
+        imageView.setBackgroundResource(R.drawable.rocket_thrust);
+        rocketAnimation = (AnimationDrawable) imageView.getBackground();
+        rocketAnimation.start();
+    }
+    public void stopAnim(View v){
+        if(rocketAnimation.isRunning()){
+        rocketAnimation.stop();
+        }
     }
 }
