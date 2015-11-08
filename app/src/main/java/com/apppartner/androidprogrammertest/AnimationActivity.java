@@ -33,6 +33,7 @@ public class AnimationActivity extends ActionBarActivity
     final static int FLIP_HORIZONTAL = 2;
     Bitmap bitmap;
     AnimationDrawable rocketAnimation;
+    int angle=0;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -216,5 +217,9 @@ public class AnimationActivity extends ActionBarActivity
         if(rocketAnimation.isRunning()){
         rocketAnimation.stop();
         }
+    }
+    public void rotation(View v){
+        angle=angle + 90;
+        imageView.setRotation(angle);
     }
 }

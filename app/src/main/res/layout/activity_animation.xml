@@ -106,12 +106,23 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop Anim"
+        android:text="Stop Frame"
         android:id="@+id/button11"
         android:layout_marginTop="511dp"
         android:onClick="stopAnim"
         android:background="#FFA500"
         android:textColor="#ffffff"
         />
-
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rotate"
+        android:id="@+id/button12"
+        android:layout_marginTop="511dp"
+        android:layout_marginLeft="95dp"
+        android:onClick="rotation"
+        android:background="#FFA500"
+        android:textColor="#ffffff"
+        />
 </RelativeLayout>
