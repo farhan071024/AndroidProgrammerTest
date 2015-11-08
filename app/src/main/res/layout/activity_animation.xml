@@ -132,8 +132,20 @@
         android:text="Bounce"
         android:id="@+id/button13"
         android:layout_marginTop="511dp"
-        android:layout_marginLeft="155dp"
+        android:layout_marginLeft="157dp"
         android:onClick="bounce"
+        android:background="#FFA500"
+        android:textColor="#ffffff"
+        />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Move"
+        android:id="@+id/button14"
+        android:layout_marginTop="511dp"
+        android:layout_marginLeft="220dp"
+        android:onClick="move"
         android:background="#FFA500"
         android:textColor="#ffffff"
         />

@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.BounceInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -226,5 +227,14 @@ public class AnimationActivity extends ActionBarActivity
         animY.setInterpolator(new BounceInterpolator());
         animY.setRepeatCount(5);
         animY.start();
+    }
+    public void move(View v){
+        TranslateAnimation animation = new TranslateAnimation(0.0f, 400.0f,
+                0.0f, 0.0f);
+        animation.setDuration(3000);
+        animation.setRepeatCount(3);
+        animation.setRepeatMode(2);
+        animation.setFillAfter(true);
+        imageView.startAnimation(animation);
     }
 }
