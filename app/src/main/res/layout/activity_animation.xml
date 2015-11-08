@@ -51,6 +51,8 @@
         android:id="@+id/button6"
         android:layout_marginTop="455dp"
         android:onClick="flipHorizontal"
+        android:background="#FFA500"
+        android:textColor="#ffffff"
        />
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -59,8 +61,34 @@
         android:text="Flip V"
         android:id="@+id/button7"
         android:layout_marginTop="455dp"
-        android:layout_marginLeft="70dp"
+        android:layout_marginLeft="65dp"
         android:onClick="flipVertical"
+        android:background="#FFA500"
+        android:textColor="#ffffff"
+        />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gray"
+        android:id="@+id/button8"
+        android:layout_marginTop="455dp"
+        android:layout_marginLeft="130dp"
+        android:onClick="gray"
+        android:background="#FFA500"
+        android:textColor="#ffffff"
+        />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Color"
+        android:id="@+id/button9"
+        android:layout_marginTop="455dp"
+        android:layout_marginLeft="195dp"
+        android:onClick="color"
+        android:background="#FFA500"
+        android:textColor="#ffffff"
         />
 
 </RelativeLayout>

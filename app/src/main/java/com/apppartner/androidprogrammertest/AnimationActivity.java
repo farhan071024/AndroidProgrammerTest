@@ -5,6 +5,8 @@ import android.content.ClipDescription;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
@@ -188,5 +190,20 @@ public class AnimationActivity extends ActionBarActivity
     }
     public void flipVertical(View v){
         imageView .setImageBitmap(flip(bitmap ,FLIP_VERTICAL));
+    }
+    public void gray(View v){
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        imageView.setColorFilter(filter);
+    }
+    public void color(View v){
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(1);
+
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        imageView.setColorFilter(filter);
+
     }
 }
