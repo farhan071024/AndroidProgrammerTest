@@ -89,9 +89,13 @@ public class LoginActivity extends ActionBarActivity
     public void login(View v){
       String  name=userName.getText().toString();
       String  password=userPassword.getText().toString();
-      nameAndPassword= name+","+password;
-      BackgroundTask bt=new BackgroundTask();
-      bt.execute(nameAndPassword);
+      if(name.matches("")||name.equals(null)||password.matches("")||password.equals(null)) {
+          Toast.makeText(LoginActivity.this,"please enter valid username and password",Toast.LENGTH_SHORT).show();
+      }else{
+          nameAndPassword = name + "," + password;
+          BackgroundTask bt = new BackgroundTask();
+          bt.execute(nameAndPassword);
+      }
     }
     public class BackgroundTask extends AsyncTask<String,Void,String>{
         String Info[]={};
@@ -132,7 +136,6 @@ public class LoginActivity extends ActionBarActivity
 
             /* Convert the Bytes read to a String. */
                 text = new String(baf.toByteArray());
-                //txtvw.setText(text);
             } catch (ClientProtocolException e) {
                 // TODO Auto-generated catch block
             } catch (IOException e) {
@@ -143,6 +146,7 @@ public class LoginActivity extends ActionBarActivity
 
         @Override
         protected void onPostExecute(String s) {
+            Toast.makeText(LoginActivity.this,s,Toast.LENGTH_SHORT).show();
             finishTime=System.currentTimeMillis();
             try {
                 final JSONObject object= new JSONObject(s);
