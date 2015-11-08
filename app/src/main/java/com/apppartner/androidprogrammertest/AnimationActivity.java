@@ -3,8 +3,11 @@ package com.apppartner.androidprogrammertest;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -23,7 +26,9 @@ public class AnimationActivity extends ActionBarActivity
     ImageView imageView;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
     private Toolbar toolBar;
-
+    final static int FLIP_VERTICAL = 1;
+    final static int FLIP_HORIZONTAL = 2;
+    Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -33,6 +38,8 @@ public class AnimationActivity extends ActionBarActivity
 
         imageView= (ImageView) findViewById(R.id.imageView2);
        // imageView.setImageResource(R.drawable.ic_apppartner);
+         bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap(); // get bitmap associated with your imageview
+
 
         //setting up the toolbar
         toolBar= (Toolbar) findViewById(R.id.include);
@@ -143,6 +150,25 @@ public class AnimationActivity extends ActionBarActivity
 
     }
 
+    public static Bitmap flip(Bitmap src, int type) {
+        // create new matrix for transformation
+        Matrix matrix = new Matrix();
+        // if vertical
+        if(type == FLIP_VERTICAL) {
+            matrix.preScale(1.0f, -1.0f);
+        }
+        // if horizonal
+        else if(type == FLIP_HORIZONTAL) {
+            matrix.preScale(-1.0f, 1.0f);
+            // unknown type
+        } else {
+            return null;
+        }
+
+        // return transformed image
+        return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
+    }
+
     @Override
     public void onBackPressed()
     {
@@ -157,5 +183,11 @@ public class AnimationActivity extends ActionBarActivity
       //  animation1.setStartOffset(5000);
         animation1.setFillAfter(true);
         imageView.startAnimation(animation1);
+    }
+    public void flipHorizontal(View v){
+        imageView .setImageBitmap(flip(bitmap ,FLIP_HORIZONTAL));
+    }
+    public void flipVertical(View v){
+        imageView .setImageBitmap(flip(bitmap ,FLIP_VERTICAL));
     }
 }
