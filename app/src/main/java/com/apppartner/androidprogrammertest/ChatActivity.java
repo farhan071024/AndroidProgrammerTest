@@ -3,6 +3,7 @@ package com.apppartner.androidprogrammertest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,14 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.apppartner.androidprogrammertest.adapters.ChatsArrayAdapter;
 import com.apppartner.androidprogrammertest.models.ChatData;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +29,7 @@ public class ChatActivity extends ActionBarActivity
     private ChatsArrayAdapter chatsArrayAdapter;
     private ListView listView;
     private Toolbar toolBar;
+    public static Typeface type,type2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +38,11 @@ public class ChatActivity extends ActionBarActivity
         setContentView(R.layout.activity_chat);
 
         listView = (ListView) findViewById(R.id.listView);
+
+        //Setting the suggested fonts
+        type = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato.ttf");
+        type2 = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato Light.ttf");
+
 
         //setting up the toolbar
         toolBar= (Toolbar) findViewById(R.id.include);

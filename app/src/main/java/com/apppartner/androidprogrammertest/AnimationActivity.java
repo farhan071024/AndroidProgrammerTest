@@ -65,13 +65,6 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
             }
         });
 
-        // fading the image to 0% alpha
-        AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
-        animation.setDuration(3000);
-        animation.setStartOffset(1000);
-        animation.setFillAfter(true);
-        imageView.startAnimation(animation);
-
         //providing drag functionality
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -171,8 +164,14 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
 
     // fading the image 100% alpha by pressing "fade" button
     public void fade(View v){
+        // fading the image to 0% alpha
+        AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
+        animation.setDuration(5000);
+        animation.setFillAfter(true);
+        imageView.startAnimation(animation);
+
         AlphaAnimation animation1 = new AlphaAnimation(0.0f, 1.0f);
-        animation1.setDuration(3000);
+        animation1.setDuration(5000);
         animation1.setFillAfter(true);
         imageView.startAnimation(animation1);
     }

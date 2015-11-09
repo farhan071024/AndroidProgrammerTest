@@ -24,6 +24,7 @@
         android:layout_marginTop="1dp"
         android:textSize="19sp"
         android:background="#ffffff"
+        android:textColor="#000000"
         />
 
     <TextView
@@ -35,5 +36,6 @@
         android:layout_marginLeft="90dp"
         android:layout_below="@+id/usernameTextView"
         android:textSize="15sp"
-        android:background="#ffffff"/>
+        android:background="#ffffff"
+        android:textColor="#000000"/>
 </RelativeLayout>

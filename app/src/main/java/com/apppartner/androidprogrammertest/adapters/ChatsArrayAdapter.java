@@ -11,8 +11,6 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.apppartner.androidprogrammertest.ChatActivity;
 import com.apppartner.androidprogrammertest.R;
 import com.apppartner.androidprogrammertest.models.ChatData;
 
@@ -54,6 +53,10 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
         chatCell.messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
         chatCell.imageView = (ImageView) convertView.findViewById(R.id.imageView);
 
+        //applying fonts to the textviews
+        chatCell.usernameTextView.setTypeface(ChatActivity.type);
+        chatCell.messageTextView.setTypeface(ChatActivity.type2);
+
         chatData = getItem(position);
 
         //using AsyncTask
@@ -70,7 +73,7 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
         ImageView imageView;
     }
 
-    //Asynctask to download the images from server
+    //AsyncTask to download the images from server
     public class DownloadImage extends AsyncTask<String,Void,Bitmap>{
         URL url = null;
         Bitmap bmp=null;

@@ -119,7 +119,7 @@ public class LoginActivity extends ActionBarActivity
             HttpPost httppost = new HttpPost("http://dev.apppartner.com/AppPartnerProgrammerTest/scripts/login.php");
             try {
                 // Add  the data
-                List<NameValuePair> nameValuePairs = new ArrayList<>(2);
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("username",Info[0]));
                 nameValuePairs.add(new BasicNameValuePair("password",Info[1]));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
