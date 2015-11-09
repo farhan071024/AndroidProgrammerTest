@@ -26,6 +26,7 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 public class AnimationActivity extends ActionBarActivity implements Animation.AnimationListener
@@ -212,8 +213,13 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
 
     //Stopping frame animation
     public void stopAnim(View v){
-        if(rocketAnimation.isRunning()){
-        rocketAnimation.stop();
+        if(rocketAnimation != null) {
+            if (rocketAnimation.isRunning()) {
+                rocketAnimation.stop();
+            } else {
+            }
+        }else{
+            Toast.makeText(AnimationActivity.this,"Frame animation is not active",Toast.LENGTH_SHORT).show();
         }
     }
 
