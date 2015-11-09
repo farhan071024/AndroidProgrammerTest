@@ -38,6 +38,7 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
     Bitmap bitmap;
     AnimationDrawable rocketAnimation;
     int angle=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -63,6 +64,7 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
                 onBackPressed();
             }
         });
+
         // fading the image to 0% alpha
         AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
         animation.setDuration(3000);
@@ -70,6 +72,7 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
         animation.setFillAfter(true);
         imageView.startAnimation(animation);
 
+        //providing drag functionality
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -80,7 +83,6 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
                 View.DragShadowBuilder myShadow = new View.DragShadowBuilder(imageView);
 
                 v.startDrag(dragData, myShadow, null, 0);
-                //    imageView.setVisibility(View.INVISIBLE);
                 return true;
             }
         });
@@ -88,23 +90,18 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
         imageView.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View v, DragEvent event) {
-                //   imageView.setVisibility(View.INVISIBLE);
                 switch (event.getAction()) {
+
                     case DragEvent.ACTION_DRAG_STARTED:
                         layoutParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
-                        //     Log.d(msg, "Action is DragEvent.ACTION_DRAG_STARTED");
-
-                        // Do nothing
                         break;
 
                     case DragEvent.ACTION_DRAG_ENTERED:
-                        //    Log.d(msg, "Action is DragEvent.ACTION_DRAG_ENTERED");
                         int x_cord = (int) event.getX();
                         int y_cord = (int) event.getY();
                         break;
 
                     case DragEvent.ACTION_DRAG_EXITED:
-                        //    Log.d(msg, "Action is DragEvent.ACTION_DRAG_EXITED");
                         x_cord = (int) event.getX();
                         y_cord = (int) event.getY();
                         layoutParams.leftMargin = x_cord;
@@ -113,22 +110,16 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
                         break;
 
                     case DragEvent.ACTION_DRAG_LOCATION:
-                        //       Log.d(msg, "Action is DragEvent.ACTION_DRAG_LOCATION");
                         x_cord = (int) event.getX();
                         y_cord = (int) event.getY();
                         break;
 
                     case DragEvent.ACTION_DRAG_ENDED:
-                        //      Log.d(msg, "Action is DragEvent.ACTION_DRAG_ENDED");
-
-                        // Do nothing
                         break;
 
                     case DragEvent.ACTION_DROP:
-                        //         Log.d(msg, "ACTION_DROP event");
-
-                        // Do nothing
                         break;
+
                     default:
                         break;
                 }
@@ -142,7 +133,6 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     ClipData data = ClipData.newPlainText("", "");
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(imageView);
-
                     imageView.startDrag(data, shadowBuilder, imageView, 0);
                     imageView.setVisibility(View.INVISIBLE);
                     return true;
@@ -168,7 +158,6 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
         } else {
             return null;
         }
-
         // return transformed image
         return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
     }
@@ -180,49 +169,62 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
         startActivity(intent);
     }
 
-    // Making the image 100% alpha by pressing "fade" button
+    // fading the image 100% alpha by pressing "fade" button
     public void fade(View v){
         AlphaAnimation animation1 = new AlphaAnimation(0.0f, 1.0f);
         animation1.setDuration(3000);
-      //  animation1.setStartOffset(5000);
         animation1.setFillAfter(true);
         imageView.startAnimation(animation1);
     }
+
+    //Horizontal flip
     public void flipHorizontal(View v){
         imageView .setImageBitmap(flip(bitmap ,FLIP_HORIZONTAL));
     }
+
+    //Vertical flip
     public void flipVertical(View v){
         imageView .setImageBitmap(flip(bitmap ,FLIP_VERTICAL));
     }
+
+    // Making the image gray
     public void gray(View v){
         ColorMatrix matrix = new ColorMatrix();
         matrix.setSaturation(0);
-
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
         imageView.setColorFilter(filter);
     }
+
+    //Making the image colored
     public void color(View v){
         ColorMatrix matrix = new ColorMatrix();
         matrix.setSaturation(1);
-
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
         imageView.setColorFilter(filter);
 
     }
+
+    // Performing frame animation
     public void frameAnim(View v){
         imageView.setBackgroundResource(R.drawable.frame);
         rocketAnimation = (AnimationDrawable) imageView.getBackground();
         rocketAnimation.start();
     }
+
+    //Stopping frame animation
     public void stopAnim(View v){
         if(rocketAnimation.isRunning()){
         rocketAnimation.stop();
         }
     }
+
+    //Rotating the image by 90 degree
     public void rotation(View v){
         angle=angle + 90;
         imageView.setRotation(angle);
     }
+
+    //Performing bounce animation
     public void bounce(View v){
         ObjectAnimator animY = ObjectAnimator.ofFloat(imageView, "translationY", -100f, 0f);
         animY.setDuration(1000);//1sec
@@ -230,33 +232,34 @@ public class AnimationActivity extends ActionBarActivity implements Animation.An
         animY.setRepeatCount(5);
         animY.start();
     }
+
+    //Performing move animation
     public void move(View v){
-        TranslateAnimation animation = new TranslateAnimation(0.0f, 400.0f,
-                0.0f, 0.0f);
+        TranslateAnimation animation = new TranslateAnimation(0.0f, 400.0f, 0.0f, 0.0f);
         animation.setDuration(3000);
         animation.setRepeatCount(3);
         animation.setRepeatMode(2);
         animation.setFillAfter(true);
         imageView.startAnimation(animation);
     }
-    public void zoomIn(View v){
-       Animation animZoomIn = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.zoom_in);
 
+    //Performing Zoom In
+    public void zoomIn(View v){
+       Animation animZoomIn = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
         // set animation listener
         animZoomIn.setAnimationListener(this);
         imageView.startAnimation(animZoomIn);
     }
-    public void zoomOut(View v){
-        Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.zoom_out);
 
+    //Performing Zoom Out
+    public void zoomOut(View v){
+        Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_out);
         // set animation listener
         animZoomOut.setAnimationListener(this);
         imageView.startAnimation(animZoomOut);
     }
 
-
+    //Callbacks of AnimationListener
     @Override
     public void onAnimationStart(Animation animation) {
 

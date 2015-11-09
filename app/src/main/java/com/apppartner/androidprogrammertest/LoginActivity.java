@@ -47,6 +47,7 @@ public class LoginActivity extends ActionBarActivity
         setContentView(R.layout.activity_login);
         userName= (EditText) findViewById(R.id.editText);
         userPassword= (EditText) findViewById(R.id.editText2);
+
         //setting up the toolbar
         toolBar= (Toolbar) findViewById(R.id.include);
         toolBar.setTitle("Login");
@@ -66,10 +67,8 @@ public class LoginActivity extends ActionBarActivity
 
         // applying the suggested font
         Typeface type = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato.ttf");
-     //   Typeface type2 = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato ExtraLight.ttf");
         userName.setTypeface(type);
         userPassword.setTypeface(type);
-
 
         userName.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -86,9 +85,12 @@ public class LoginActivity extends ActionBarActivity
             }
         });
     }
+    // functionality of Login button
     public void login(View v){
       String  name=userName.getText().toString();
       String  password=userPassword.getText().toString();
+
+      //handling null or empty string
       if(name.matches("")||name.equals(null)||password.matches("")||password.equals(null)) {
           Toast.makeText(LoginActivity.this,"please enter valid username and password",Toast.LENGTH_SHORT).show();
       }else{
@@ -97,6 +99,7 @@ public class LoginActivity extends ActionBarActivity
           bt.execute(nameAndPassword);
       }
     }
+    // AsyncTask to get the JSON response
     public class BackgroundTask extends AsyncTask<String,Void,String>{
         String Info[]={};
         String text;
@@ -110,12 +113,12 @@ public class LoginActivity extends ActionBarActivity
         @Override
         protected String doInBackground(String... params) {
             Info=params[0].split(",");
+
             // Create a new HttpClient and Post Header
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://dev.apppartner.com/AppPartnerProgrammerTest/scripts/login.php");
-
             try {
-                // Add your data
+                // Add  the data
                 List nameValuePairs = new ArrayList(2);
                 nameValuePairs.add(new BasicNameValuePair("username",Info[0]));
                 nameValuePairs.add(new BasicNameValuePair("password",Info[1]));
@@ -128,28 +131,27 @@ public class LoginActivity extends ActionBarActivity
                 BufferedInputStream bis = new BufferedInputStream(is);
                 ByteArrayBuffer baf = new ByteArrayBuffer(20);
 
-                int current = 0;
-
+                int current;
                 while((current = bis.read()) != -1){
                     baf.append((byte)current);
                 }
 
-            /* Convert the Bytes read to a String. */
+            // Convert the Bytes read to a String.
                 text = new String(baf.toByteArray());
             } catch (ClientProtocolException e) {
-                // TODO Auto-generated catch block
+                e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             return text;
         }
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(LoginActivity.this,s,Toast.LENGTH_SHORT).show();
             finishTime=System.currentTimeMillis();
             try {
                 final JSONObject object= new JSONObject(s);
+
                 // creates alert dialog
                 new AlertDialog.Builder(LoginActivity.this)
                         .setTitle(object.getString("code"))
@@ -157,6 +159,7 @@ public class LoginActivity extends ActionBarActivity
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 try {
+                                    // Returns to MainActivity when code is success
                                     if (object.getString("code").matches("Success")) {
                                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                         startActivity(i);

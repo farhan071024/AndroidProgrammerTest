@@ -1,6 +1,7 @@
 /*Used Async task to download the images, however the loading of chat messages are slow because
 it has to run background tasks for loading the images and also repeats the processes whenever the view changes.
 The performance can be improved by storing the downloaded images into local cache and load from there*/
+
 package com.apppartner.androidprogrammertest.adapters;
 
 import android.content.Context;
@@ -53,10 +54,9 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
         chatCell.messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
         chatCell.imageView = (ImageView) convertView.findViewById(R.id.imageView);
 
-
         chatData = getItem(position);
 
-
+        //using AsyncTask
         DownloadImage image= new DownloadImage();
         image.execute(chatData.avatarURL);
 
@@ -69,7 +69,8 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
         TextView messageTextView;
         ImageView imageView;
     }
-    //using Asynctask to download the images from server
+
+    //Asynctask to download the images from server
     public class DownloadImage extends AsyncTask<String,Void,Bitmap>{
         URL url = null;
         Bitmap bmp=null;
@@ -89,6 +90,7 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
+
             //making the image circular in shape
             Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
             BitmapShader shader = new BitmapShader (bitmap,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
@@ -96,6 +98,7 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
             paint.setShader(shader);
             Canvas c = new Canvas(circleBitmap);
             c.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, bitmap.getWidth()/2, paint);
+
             // setting the downloaded image to imageview
             chatCell.imageView.setImageBitmap(circleBitmap);
             chatCell.usernameTextView.setText(chatData.username);

@@ -16,7 +16,8 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView= (TextView) findViewById(R.id.textView);
-        //applies the suggested fonts
+
+        //applies the suggested font
         Typeface type = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato Bold.ttf");
         textView.setTypeface(type);
     }

@@ -58,9 +58,7 @@ public class ChatActivity extends ActionBarActivity
             }
         });
 
-
         chatDataArrayList = new ArrayList<ChatData>();
-
         try
         {
             String chatFileData = loadChatFile();
@@ -107,7 +105,6 @@ public class ChatActivity extends ActionBarActivity
         bufferedReader.close();
         inputStreamReader.close();
         inputStream.close();
-
 
         return stringBuilder.toString();
     }
