@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -30,7 +31,6 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class LoginActivity extends ActionBarActivity
 {
     EditText userName,userPassword;
     private Toolbar toolBar;
-    String nameAndPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -89,9 +89,9 @@ public class LoginActivity extends ActionBarActivity
     public void login(View v){
       String  name=userName.getText().toString();
       String  password=userPassword.getText().toString();
-
+      String nameAndPassword;
       //handling null or empty string
-      if(name.matches("")||name.equals(null)||password.matches("")||password.equals(null)) {
+      if(name.matches("")||password.matches("")) {
           Toast.makeText(LoginActivity.this,"please enter valid username and password",Toast.LENGTH_SHORT).show();
       }else{
           nameAndPassword = name + "," + password;
@@ -119,7 +119,7 @@ public class LoginActivity extends ActionBarActivity
             HttpPost httppost = new HttpPost("http://dev.apppartner.com/AppPartnerProgrammerTest/scripts/login.php");
             try {
                 // Add  the data
-                List nameValuePairs = new ArrayList(2);
+                List<NameValuePair> nameValuePairs = new ArrayList<>(2);
                 nameValuePairs.add(new BasicNameValuePair("username",Info[0]));
                 nameValuePairs.add(new BasicNameValuePair("password",Info[1]));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
