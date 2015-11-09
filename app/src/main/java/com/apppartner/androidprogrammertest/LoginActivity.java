@@ -66,7 +66,7 @@ public class LoginActivity extends ActionBarActivity
 
         // applying the suggested font
         Typeface type = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato.ttf");
-//        Typeface type2 = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato ExtraLight.ttf");
+     //   Typeface type2 = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato ExtraLight.ttf");
         userName.setTypeface(type);
         userPassword.setTypeface(type);
 

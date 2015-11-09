@@ -20,13 +20,15 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 
-public class AnimationActivity extends ActionBarActivity
+public class AnimationActivity extends ActionBarActivity implements Animation.AnimationListener
 {
     ImageView imageView;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
@@ -236,5 +238,37 @@ public class AnimationActivity extends ActionBarActivity
         animation.setRepeatMode(2);
         animation.setFillAfter(true);
         imageView.startAnimation(animation);
+    }
+    public void zoomIn(View v){
+       Animation animZoomIn = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.zoom_in);
+
+        // set animation listener
+        animZoomIn.setAnimationListener(this);
+        imageView.startAnimation(animZoomIn);
+    }
+    public void zoomOut(View v){
+        Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.zoom_out);
+
+        // set animation listener
+        animZoomOut.setAnimationListener(this);
+        imageView.startAnimation(animZoomOut);
+    }
+
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
     }
 }
